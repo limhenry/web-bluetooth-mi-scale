@@ -4,11 +4,11 @@ import Metrics from './metrics'
 let scan
 
 const computeData = (data) => {
-  const buffer = new Buffer(data.buffer)
+  const buffer = new Uint8Array(data.buffer)
   const ctrlByte1 = buffer[1]
   const stabilized = ctrlByte1 & (1 << 5)
-  const weight = buffer.readUInt16LE(11) / 200
-  const impedance = buffer.readUInt16LE(9)
+  const weight = ((buffer[12] << 8) + buffer[11]) / 200
+  const impedance = (buffer[10] << 8) + buffer[9]
   if (stabilized > 0) {
     document.querySelector('.progress').removeAttribute('hidden')
   } else {
@@ -19,7 +19,7 @@ const computeData = (data) => {
     const height = document.querySelector('input[name="height"]').value
     const age = document.querySelector('input[name="age"]').value
     const gender = document.querySelector('select[name="gender"]').value
-    const metrics = new Metrics(weight, 637, height, age, gender)
+    const metrics = new Metrics(weight, impedance, height, age, gender)
     metrics.getResult().map(item => {
       const html =`<div class="item"><div class="name">${item.name}</div><div class="value">${parseFloat(item.value).toFixed(2)}</div></div>`
       document.querySelector('.result').innerHTML += html
@@ -60,7 +60,7 @@ const onButtonClick = async () => {
 const onInputChange = (e) => {
   const height = document.querySelector('input[name="height"]').value
   const age = document.querySelector('input[name="age"]').value
-  if (height && age) {
+  if (height > 0 && age > 0) {
     document.querySelector('.button.start').removeAttribute('disabled')
   } else {
     document.querySelector('.button.start').setAttribute('disabled', '')
