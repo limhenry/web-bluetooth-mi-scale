@@ -1,5 +1,7 @@
-# Mi Scale Web App
+# Xiaomi Mi Scale (MIBCS) Web Bluetooth Scanning API Demo
 Web App for Mi Scale using [Web Bluetooth Scanning API](https://googlechrome.github.io/samples/web-bluetooth/scan.html).
+
+![](https://i.imgur.com/xnbdyzO.jpg)
 
 ### Setup, Build and Serve
 
