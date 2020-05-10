@@ -1,0 +1,217 @@
+<title>Scale</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    body {
+        margin: 0;
+        font-family: sans-serif;
+        color: #4a4a4a;
+        display: flex;
+        flex-direction: column;
+        padding: 0 16px;
+    }
+
+    .app {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .form {
+        margin-bottom: 24px;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    .form p {
+        margin-bottom: 36px;
+    }
+
+    .form .input {
+        display: flex;
+        align-items: center;
+        margin: 12px 0;
+    }
+
+    .form .input label {
+        min-width: 100px;
+        display: block;
+        margin-right: 8px;
+        text-align: left;
+    }
+
+    .form .input input,
+    .form .input select {
+        border: 1px solid #cccccc;
+        padding: 0 4px;
+        height: 24px;
+        font-size: 16px;
+        width: 100%;
+    }
+
+    .button {
+        margin: 16px 0;
+        background: #1973e8;
+        color: #fff;
+        padding: 12px 22px;
+        border-radius: 8px;
+        min-width: 120px;
+        text-align: center;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .button[disabled] {
+        pointer-events: none;
+        background-color: #929292;
+    }
+
+    .scale {
+        font-size: 96px;
+        font-weight: bold;
+        color: #000;
+    }
+
+    .unit {
+        margin-left: -16px;
+        font-size: 36px;
+    }
+
+    .result {
+        width: 80%;
+        max-width: 240px;
+        margin: 0 auto;
+        padding-top: 24px;
+    }
+
+    .result .item {
+        display: flex;
+    }
+
+    .result .item .name {
+        flex: 1;
+        font-weight: 600;
+    }
+
+    .progress {
+        position: relative;
+        height: 6px;
+        width: 100%;
+        max-width: 180px;
+        background-color: #e3f2fd;
+        border-radius: 2px;
+        background-clip: padding-box;
+        margin: 0.5rem 0 1rem 0;
+        overflow: hidden;
+    }
+
+    .progress .indeterminate {
+        background-color: #1e88e5;
+    }
+
+    .progress .indeterminate:before {
+        content: '';
+        position: absolute;
+        background-color: inherit;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        will-change: left, right;
+        animation: indeterminate 1.7s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+    }
+
+    .progress .indeterminate:after {
+        content: '';
+        position: absolute;
+        background-color: inherit;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        will-change: left, right;
+        animation: indeterminate-short 1.7s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+        animation-delay: 1s;
+    }
+
+    footer {
+        text-align: center;
+        padding: 8px 0;
+        font-size: 15px;
+    }
+
+    footer a {
+        margin: 0 8px;
+    }
+
+    @keyframes indeterminate {
+        0% {
+            left: -35%;
+            right: 100%;
+        }
+
+        60% {
+            left: 100%;
+            right: -90%;
+        }
+
+        100% {
+            left: 100%;
+            right: -90%;
+        }
+    }
+
+    @keyframes indeterminate-short {
+        0% {
+            left: -200%;
+            right: 100%;
+        }
+
+        60% {
+            left: 107%;
+            right: -8%;
+        }
+
+        100% {
+            left: 107%;
+            right: -8%;
+        }
+    }
+</style>
+<div class="app">
+    <form class="form">
+        <h2>Xiaomi Mi Scale (MIBCS) Web Bluetooth Scanning API Demo</h2>
+        <p>This demo required Chrome 79+ with chrome://flags/#enable-experimental-web-platform-features flag enabled.</p>
+        <div class="input">
+            <label>Age</label>
+            <input name="age" type="number" required>
+        </div>
+        <div class="input">
+            <label>Height (cm)</label>
+            <input name="height" type="number" required>
+        </div>
+        <div class="input">
+            <label>Gender</label>
+            <select name="gender">
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+            </select>
+        </div>
+    </form>
+    <div class="button start" disabled>Start</div>
+    <div class="loading" hidden>Searching for Mi Scale ...</div>
+    <div class="scale" hidden>
+        <span class="value">0.0</span>
+        <span class="unit">kg</span>
+    </div>
+    <div class="progress" hidden>
+        <div class="indeterminate"></div>
+    </div>
+    <div class="result" hidden></div>
+</div>
+<footer>
+    <a href="">Blog</a>
+    <a href="">GitHub</a>
+    <a href="">Twitter</a>
+</footer>
+
+<script src="./main.js"></script>
