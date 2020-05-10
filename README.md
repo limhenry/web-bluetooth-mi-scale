@@ -16,7 +16,7 @@ npm run dev
 npm run build
 ```
 
-For detailed explanation on how things work, checkout the [this article](https://www.medium.com/).
+For detailed explanation on how things work, checkout the [this article](https://dev.to/henrylim96/reading-xiaomi-mi-scale-data-with-web-bluetooth-scanning-api-1mb9).
 
 ### Special Thanks
 
