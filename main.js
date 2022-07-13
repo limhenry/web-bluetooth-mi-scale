@@ -39,7 +39,7 @@ const onButtonClick = async () => {
     document.querySelector('.loading').removeAttribute('hidden')
     document.querySelector('.form').setAttribute('hidden', '')
     navigator.bluetooth.addEventListener('advertisementreceived', event => {
-      if (event.device.name !== 'MIBCS') return
+      if (event.device.name !== 'MIBCS' || event.device.name !== 'MIBFS') return
       document.querySelector('.loading').setAttribute('hidden', '')
       document.querySelector('.scale').removeAttribute('hidden')
       event.serviceData.forEach((valueDataView) => {  
